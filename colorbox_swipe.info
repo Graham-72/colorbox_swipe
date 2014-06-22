@@ -1,1 +1,7 @@
 name = Colorbox Swipe Gestures Support
+package = User interface
+description = Adds swipe gesture support to Colorbox for smart devices. Sponsored by DROWL.de, the Drupal & Responsive Specialists.
+core = 7.x
+
+dependencies[] = colorbox
+dependencies[] = jquery_update

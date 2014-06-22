@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file Helper module to recognize swipe events in lightbox.
+ * Mini Module developed by DROWL.de
+ */
+
+/**
+ * Initialization of colorbox_swipe (on each page).
+ */
+function colorbox_swipe_init() {
+  // Only add the swipe support if lightbox is added on the page.
+  // Respect the lightbox settings.
+  if (colorbox_exclude_these_paths() != 1) {
+    // We need jQuery UI!
+    drupal_add_library('system', 'ui');
+
+    $module_path = drupal_get_path('module', 'colorbox_swipe');
+    drupal_add_css($module_path . '/colorbox_swipe.css');
+    // TODO - Use http://drupal.org/documentation/modules/libraries module
+    // instead.
+    drupal_add_js($module_path . '/colorbox_swipe.js');
+    drupal_add_js($module_path . '/js/jquery.event.swipe.js');
+    drupal_add_js($module_path . '/js/jquery.event.move.js');
+  }
+}
