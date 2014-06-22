@@ -20,26 +20,14 @@
                         function(e) {
                           // Disable selection.
                           $(this).disableSelection();
-                          $(this).find('#nextLink').remove();
-                          $(this).find('#prevLink').remove();
-
-                          if ((colorbox.total > 1 && ((colorbox.isSlideshow && colorbox.loopSlides) || (!colorbox.isSlideshow && colorbox.loopItems)))
-                              || colorbox.activeImage != (colorbox.total - 1)) {
-                            colorbox.changeData(colorbox.activeImage + 1);
-                          }
+                          $.colorbox.next();
                         })
                     .on(
                         'swiperight',
                         function(e) {
                           // Disable selection.
                           $(this).disableSelection();
-                          $(this).find('#nextLink').remove();
-                          $(this).find('#prevLink').remove();
-
-                          if ((colorbox.total > 1 && ((colorbox.isSlideshow && colorbox.loopSlides) || (!colorbox.isSlideshow && colorbox.loopItems)))
-                              || colorbox.activeImage !== 0) {
-                            colorbox.changeData(colorbox.activeImage - 1);
-                          }
+                          $.colorbox.prev();
                         });
               });
     }

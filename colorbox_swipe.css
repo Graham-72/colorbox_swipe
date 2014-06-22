@@ -1,7 +1,7 @@
 /**
  * Prevent unwanted selection that may happen on swipe.
  */
-#colorbox, #nextLink, #prevLink, #hoverNav {
+#colorbox {
   -moz-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;
