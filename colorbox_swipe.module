@@ -19,7 +19,7 @@ function colorbox_swipe_init() {
       drupal_add_library('system', 'ui');
       $module_path = drupal_get_path('module', 'colorbox_swipe');
       drupal_add_css($module_path . '/colorbox_swipe.css');
-      drupal_add_js($module_path . '/colorbox_swipe.js');
+      drupal_add_js($module_path . '/colorbox_swipe.js', array('scope' => 'footer'));
     }
   }
 }
