@@ -114,7 +114,7 @@ function colorbox_swipe_libraries_info() {
     'download url' => 'https://github.com/stephband/jquery.event.move/archive/master.zip',
     'version' => '1.0',
     'files' => array(
-      'js' => array('js/jquery.event.move.js'),));
+      'js' => array('js/jquery.event.move.js' => array('scope' => 'footer'))));
 
   $libraries['jquery.event.swipe'] = array(
     'name' => 'jQuery Event Swipe',
@@ -122,7 +122,7 @@ function colorbox_swipe_libraries_info() {
     'download url' => 'https://github.com/stephband/jquery.event.swipe/archive/master.zip',
     'version' => '1.0',
     'files' => array(
-      'js' => array('js/jquery.event.swipe.js')));
+      'js' => array('js/jquery.event.swipe.js' => array('scope' => 'footer'))));
 
   return $libraries;
 }
