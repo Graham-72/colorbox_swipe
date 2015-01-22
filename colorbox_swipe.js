@@ -10,20 +10,22 @@
      * @param settings
      */
     attach: function(context, settings) {
-      // Global context!
-      $("#colorbox *", context).bind(
-        'swipeleft',
-        function(e) {
-          // Disable selection.
-          $(this).disableSelection();
-          $.colorbox.next();
-        }).bind(
-        'swiperight',
-        function(e) {
-          // Disable selection.
-          $(this).disableSelection();
-          $.colorbox.prev();
-        });
+      $(document).ready(function() {
+        // Global context!
+        $("#colorbox *", context).bind(
+                'swipeleft',
+                function(e) {
+                  // Disable selection.
+                  $(this).disableSelection();
+                  $.colorbox.next();
+                }).bind(
+                'swiperight',
+                function(e) {
+                  // Disable selection.
+                  $(this).disableSelection();
+                  $.colorbox.prev();
+                });
+      });
     }
   }
 })(jQuery);
