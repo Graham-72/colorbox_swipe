@@ -8,8 +8,12 @@
 /**
  * Initialization of colorbox_swipe (on each page).
  */
-function colorbox_swipe_init() {
-  // Only add the swipe support if lightbox is added on the page.
+function colorbox_swipe_page_build(&$page) {
+  static $already_added = FALSE;
+  if ($already_added) {
+    return; // Don't add the JavaScript and CSS multiple times.
+  }
+  // Only add the swipe support if colorbox is added on the page.
   // Respect the lightbox settings.
   // Do not load colorbox swipe during the Drupal installation process, e.g. if part
   // of installation profiles.
@@ -21,6 +25,7 @@ function colorbox_swipe_init() {
       drupal_add_css($module_path . '/colorbox_swipe.css');
       drupal_add_js($module_path . '/colorbox_swipe.js', array('scope' => 'footer'));
     }
+    $already_added = TRUE;
   }
 }
 
