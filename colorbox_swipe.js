@@ -1,31 +1,40 @@
 (function($) {
   /**
-   * Initialization
-   */
+  * Initialization
+  */
   Drupal.behaviors.colorbox_swipe = {
     /**
-     * Run Drupal module JS initialization.
-     *
-     * @param context
-     * @param settings
-     */
+    * Run Drupal module JS initialization.
+    *
+    * @param context
+    * @param settings
+    */
     attach: function(context, settings) {
       $(document).ready(function() {
+        var timeout = 100;
+        var timeoutNext;
+        var timeoutPrevious;
         // Global context!
         $("#colorbox *", context).bind(
-                'swipeleft',
-                function(e) {
-                  // Disable selection.
-                  $(this).disableSelection();
-                  $.colorbox.next();
-                }).bind(
-                'swiperight',
-                function(e) {
-                  // Disable selection.
-                  $(this).disableSelection();
-                  $.colorbox.prev();
-                });
-      });
-    }
-  }
-})(jQuery);
+          'swipeleft',
+          function(e) {
+            function gotoNext() {
+              $(this).disableSelection();
+              $.colorbox.next();
+            }
+            clearTimeout(timeoutNext);
+            timeoutNext = setTimeout(gotoNext, timeout);
+          }).bind(
+            'swiperight',
+            function(e) {
+              function gotoPrevious() {
+                $(this).disableSelection();
+                $.colorbox.prev();
+              }
+              clearTimeout(timeoutPrevious);
+              timeoutPrevious = setTimeout(gotoPrevious, timeout);
+            });
+          });
+        }
+      };
+    })(jQuery);
