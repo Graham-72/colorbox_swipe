@@ -2,9 +2,9 @@
   /**
   * Initialization
   */
-  Drupal.behaviors.colorbox_swipe = {
+  Backdrop.behaviors.colorbox_swipe = {
     /**
-    * Run Drupal module JS initialization.
+    * Run Backdrop module JS initialization.
     *
     * @param context
     * @param settings
