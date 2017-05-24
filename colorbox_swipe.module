@@ -7,23 +7,25 @@
 
 /**
  * Initialization of colorbox_swipe (on each page).
+ * Implement hook_preprocess_page()
  */
-function colorbox_swipe_page_build(&$page) {
+function colorbox_swipe_preprocess_page(&$page) {
+  // dpm($page,'Page for swipe');
   static $already_added = FALSE;
   if ($already_added) {
     return; // Don't add the JavaScript and CSS multiple times.
   }
   // Only add the swipe support if colorbox is added on the page.
   // Respect the lightbox settings.
-  // Do not load colorbox swipe during the Drupal installation process, e.g. if part
+  // Do not load colorbox swipe during the Backdrop installation process, e.g. if part
   // of installation profiles.
-  if (!drupal_installation_attempted() && _colorbox_active()) {
+  if (!backdrop_installation_attempted() && _colorbox_active()) {
     if (($library_jquery_event_move = libraries_load('jquery.event.move')) && !empty($library_jquery_event_move['loaded']) && ($library_jquery_event_swipe = libraries_load('jquery.event.swipe')) && !empty($library_jquery_event_swipe['loaded'])) {
       // We need jQuery UI!
-      drupal_add_library('system', 'ui');
-      $module_path = drupal_get_path('module', 'colorbox_swipe');
-      drupal_add_css($module_path . '/colorbox_swipe.css');
-      drupal_add_js($module_path . '/colorbox_swipe.js', array('scope' => 'footer'));
+      backdrop_add_library('system', 'ui');
+      $module_path = backdrop_get_path('module', 'colorbox_swipe');
+      backdrop_add_css($module_path . '/colorbox_swipe.css');
+      backdrop_add_js($module_path . '/colorbox_swipe.js', array('scope' => 'footer'));
     }
     $already_added = TRUE;
   }
@@ -70,7 +72,7 @@ function colorbox_swipe_requirements($phase) {
     }
 
     // Check if the site is running >= jQuery 1.7
-    if (($library = drupal_get_library('system', 'jquery')) && version_compare($library['version'], '1.7', '>=')) {
+    if (($library = backdrop_get_library('system', 'jquery')) && version_compare($library['version'], '1.7', '>=')) {
       $requirements['jquery.event.move-jquery'] = array(
         'title' => t('jquery.event.move'),
         'value' => t('jQuery @version', array('@version' => $library['version'])),
@@ -78,7 +80,7 @@ function colorbox_swipe_requirements($phase) {
       );
     }
     else {
-      $destination = drupal_get_destination();
+      $destination = backdrop_get_destination();
       $requirements['jquery.event.move-jquery'] = array(
         'title' => t('jquery.event.move'),
         'value' => t('jQuery @version', array('@version' => $library['version'])),
@@ -87,7 +89,7 @@ function colorbox_swipe_requirements($phase) {
       );
     }
 
-    if (($library = drupal_get_library('system', 'ui')) && version_compare($library['version'], '1.8', '>=')) {
+    if (($library = backdrop_get_library('system', 'ui')) && version_compare($library['version'], '1.8', '>=')) {
       $requirements['jquery.event.move-jqueryui'] = array(
         'title' => t('jquery.event.move'),
         'value' => t('jQuery UI @version', array('@version' => $library['version'])),
@@ -95,7 +97,7 @@ function colorbox_swipe_requirements($phase) {
       );
     }
     else {
-      $destination = drupal_get_destination();
+      $destination = backdrop_get_destination();
       $requirements['jquery.event.move-jqueryui'] = array(
         'title' => t('jquery.event.move'),
         'value' => t('jQuery UI @version', array('@version' => $library['version'])),
@@ -119,7 +121,7 @@ function colorbox_swipe_libraries_info() {
     'download url' => 'https://github.com/stephband/jquery.event.move/archive/master.zip',
     'version' => '1.0',
     'files' => array(
-      'js' => array('js/jquery.event.move.js' => array('scope' => 'footer'))));
+      'js' => array('jquery.event.move.js' => array('scope' => 'footer'))));
 
   $libraries['jquery.event.swipe'] = array(
     'name' => 'jQuery Event Swipe',
@@ -127,7 +129,7 @@ function colorbox_swipe_libraries_info() {
     'download url' => 'https://github.com/stephband/jquery.event.swipe/archive/master.zip',
     'version' => '1.0',
     'files' => array(
-      'js' => array('js/jquery.event.swipe.js' => array('scope' => 'footer'))));
+      'js' => array('jquery.event.swipe.js' => array('scope' => 'footer'))));
 
   return $libraries;
 }
